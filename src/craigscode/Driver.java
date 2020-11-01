@@ -8,11 +8,12 @@ import craigscode.components.MDWriter;
 class Driver {
 
     public static void main(String[] args) throws Exception {
-        MDPage page = new MDPage("README.md");
+        MDPage page = new MDPage("TEST.md");
         page.addHeader(1, "This is a testing page!");
-        page.addText("This really is just a test. New line for sure.", true);
-        page.addText("I am figuring out how to do this. ", false);
-        page.addText("Hopefully it all works out!", true);
+        page.addText("This really is just a test. New line for sure.");
+        page.addLineBreak();
+        page.addText("I am figuring out how to do this. ");
+        page.addText("Hopefully it all works out!");
         MDTable table = new MDTable(3);
         String[] header = {"Animal", "Legs", "Coolness Factor"};
         String[] cat = {"Cat", "4", "6"};

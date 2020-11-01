@@ -1,6 +1,6 @@
 package craigscode.exceptions;
 
-public class HeaderOutOfBoundsException extends MarkdownException {
+public class HeaderOutOfBoundsException extends MDException {
     public HeaderOutOfBoundsException() {
         super();
     }

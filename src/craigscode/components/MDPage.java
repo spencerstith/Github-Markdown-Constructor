@@ -1,10 +1,9 @@
 package craigscode.components;
 
 import craigscode.exceptions.HeaderOutOfBoundsException;
-import craigscode.exceptions.MarkdownException;
+import craigscode.exceptions.MDException;
 
 // TODO: Add the following:
-//  italics and bold
 //  images
 
 public class MDPage {
@@ -17,14 +16,30 @@ public class MDPage {
         this.builder = new StringBuilder();
     }
 
-    public void addText(String text, boolean newLine) {
+    ///////////////////////////////////
+    //  TEXT ADDITIONS
+
+    public void addText(String text) {
         builder.append(text);
-        if (newLine) {
-            builder.append("  \n");
-        }
     }
 
-    public void addHeader(int strength, String value) throws MarkdownException {
+    public void addBoldText(String text) {
+        builder.append("**" + text + "**");
+    }
+
+    public void addItalicizedText(String text) {
+        builder.append("*" + text + "*");
+    }
+
+    public void addLineBreak() {
+        builder.append("  \n");
+    }
+
+    public void addLink(String text, String url) {
+        builder.append(String.format("[%s](%s)", text, url));
+    }
+
+    public void addHeader(int strength, String value) throws MDException {
         System.out.println();
 
         if (strength < 1 || strength > 6) {

@@ -1,43 +1,57 @@
 package craigscode.components;
 
 import craigscode.exceptions.ColumnMismatchException;
-import craigscode.exceptions.MarkdownException;
+import craigscode.exceptions.MDException;
+import craigscode.helpers.Functional;
 
 import java.util.ArrayList;
 
 
 public class MDTable {
 
-    private String[] headers;
+    private String[] header;
     private ArrayList<String[]> rows;
 
     public MDTable(int columns) {
-        this.headers = new String[columns];
+        this.header = new String[columns];
         this.rows = new ArrayList<>();
     }
 
-    public void addHeader(String[] row) throws MarkdownException {
-        if (row.length > headers.length) {
+    public MDTable(String[] header) {
+        this.header = header;
+        this.rows = new ArrayList<>();
+    }
+
+    public MDTable(ArrayList<String> header) {
+        this(Functional.toArray(header));
+    }
+
+    public void setHeader(String[] newHeader) throws MDException {
+        if (newHeader.length > header.length) {
             throw new ColumnMismatchException();
         }
-        headers = row;
-        rows.add(0, row);
+        header = newHeader;
+        rows.add(0, newHeader);
     }
 
-    public void addRows(ArrayList<String[]> rows) throws MarkdownException{
+    public void setHeader(ArrayList<String> newHeader) throws MDException {
+        setHeader(Functional.toArray(newHeader));
+    }
+
+    public void addRows(ArrayList<String[]> rows) throws MDException {
         for (String[] row : rows) {
             addRow(row);
         }
     }
 
-    public void addRows(String[][] rows) throws MarkdownException {
+    public void addRows(String[][] rows) throws MDException {
         for (String[] row : rows) {
             addRow(row);
         }
     }
 
-    public void addRow(String[] row) throws MarkdownException {
-        if (row.length > headers.length) {
+    public void addRow(String[] row) throws MDException {
+        if (row.length > header.length) {
             throw new ColumnMismatchException();
         }
         rows.add(row);
@@ -45,13 +59,13 @@ public class MDTable {
 
     public String toString() {
         StringBuilder builder = new StringBuilder();
-        // Headers
-        for (String string : headers) {
-            builder.append("| " + string);
+        // header
+        for (String string : header) {
+            builder.append("| ").append(string);
         }
         builder.append("|\n");
         // Divider
-        for (String string : headers) {
+        for (String string : header) {
             builder.append("|");
             for (int i = 0; i < string.length(); i++) {
                 builder.append("-");
@@ -61,7 +75,7 @@ public class MDTable {
         // Values
         for (int i = 1; i < rows.size(); i++) {
             for (String string : rows.get(i)) {
-                builder.append("| " + string);
+                builder.append("| ").append(string);
             }
             builder.append("|\n");
         }
