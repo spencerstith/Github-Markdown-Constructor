@@ -1,4 +1,4 @@
-package craigscode;
+package craigscode.components;
 
 import craigscode.exceptions.ColumnMismatchException;
 import craigscode.exceptions.MarkdownException;
@@ -6,17 +6,17 @@ import craigscode.exceptions.MarkdownException;
 import java.util.ArrayList;
 
 
-public class MarkdownTable {
+public class MDTable {
 
     private String[] headers;
     private ArrayList<String[]> rows;
 
-    MarkdownTable(int columns) {
+    public MDTable(int columns) {
         this.headers = new String[columns];
         this.rows = new ArrayList<>();
     }
 
-    void addHeader(String[] row) throws MarkdownException {
+    public void addHeader(String[] row) throws MarkdownException {
         if (row.length > headers.length) {
             throw new ColumnMismatchException();
         }
@@ -24,19 +24,19 @@ public class MarkdownTable {
         rows.add(0, row);
     }
 
-    void addRows(ArrayList<String[]> rows) throws MarkdownException{
+    public void addRows(ArrayList<String[]> rows) throws MarkdownException{
         for (String[] row : rows) {
             addRow(row);
         }
     }
 
-    void addRows(String[][] rows) throws MarkdownException {
-        for (String row[] : rows) {
+    public void addRows(String[][] rows) throws MarkdownException {
+        for (String[] row : rows) {
             addRow(row);
         }
     }
 
-    void addRow(String[] row) throws MarkdownException {
+    public void addRow(String[] row) throws MarkdownException {
         if (row.length > headers.length) {
             throw new ColumnMismatchException();
         }

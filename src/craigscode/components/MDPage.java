@@ -1,4 +1,4 @@
-package craigscode;
+package craigscode.components;
 
 import craigscode.exceptions.HeaderOutOfBoundsException;
 import craigscode.exceptions.MarkdownException;
@@ -7,24 +7,24 @@ import craigscode.exceptions.MarkdownException;
 //  italics and bold
 //  images
 
-public class MarkdownPage {
+public class MDPage {
 
     private String fileName;
     private StringBuilder builder;
 
-    MarkdownPage(String fileName) {
+    public MDPage(String fileName) {
         this.fileName = fileName;
         this.builder = new StringBuilder();
     }
 
-    void addText(String text, boolean newLine) {
+    public void addText(String text, boolean newLine) {
         builder.append(text);
         if (newLine) {
             builder.append("  \n");
         }
     }
 
-    void addHeader(int strength, String value) throws MarkdownException {
+    public void addHeader(int strength, String value) throws MarkdownException {
         System.out.println();
 
         if (strength < 1 || strength > 6) {
@@ -36,11 +36,11 @@ public class MarkdownPage {
         builder.append(' ' + value + "\n");
     }
 
-    void addTable(MarkdownTable table) {
+    public void addTable(MDTable table) {
         builder.append(table.toString());
     }
 
-    String getFileName() {
+    public String getFileName() {
         return fileName;
     }
 
