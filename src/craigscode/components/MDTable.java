@@ -59,7 +59,7 @@ public class MDTable {
 
     public String toString() {
         StringBuilder builder = new StringBuilder();
-        // header
+        // Header
         for (String string : header) {
             builder.append("| ").append(string);
         }

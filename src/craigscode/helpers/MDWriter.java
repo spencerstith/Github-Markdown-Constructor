@@ -1,4 +1,6 @@
-package craigscode.components;
+package craigscode.helpers;
+
+import craigscode.components.MDPage;
 
 import java.io.File;
 import java.io.FileWriter;
