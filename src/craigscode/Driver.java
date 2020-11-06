@@ -1,12 +1,12 @@
 package craigscode;
 
-import craigscode.components.MDPage;
+import craigscode.helpers.Testing;
 
 class Driver {
 
     public static void main(String[] args) throws Exception {
         //TODO: add a testing class
-        MDPage page = new MDPage("TEST.md");
+        Testing.send();
     }
 
 }

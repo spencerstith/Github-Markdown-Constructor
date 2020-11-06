@@ -3,6 +3,10 @@ package craigscode.components;
 // TODO: Add the following:
 //  images
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+
 public class MDPage extends MDComponent {
 
     private String fileName;
@@ -16,23 +20,35 @@ public class MDPage extends MDComponent {
     ///////////////////////////////////
     //  TEXT ADDITIONS
 
-    public void addText(String text) {
+    public void text(String text) {
         builder.append(text);
     }
 
-    public void addText(String text, int type) {
+   public void textWithLineBreak(String text) {
+        text(text + "\n  ");
+   }
+
+    public void text(String text, MD type) {
         switch(type) {
-            case 2:
+            case BOLD:
                 text = "**" + text + "**";
                 break;
-            case 3:
+            case ITALICIZED:
                 text = "*" + text + "*";
                 break;
-            case 4:
+            case BANDI:
                 text = "**_" + text + "_**";
                 break;
         }
         builder.append(text);
+    }
+
+    public void textWithLineBreak(String text, MD type) {
+        text(text + "\n  ", type);
+    }
+
+    public String lineBreak() {
+        return "\n  ";
     }
 
     public void addLink(String text, String url) {
@@ -47,8 +63,12 @@ public class MDPage extends MDComponent {
         return fileName;
     }
 
-    public String toString() {
-        return builder.toString();
+
+    public void write() throws IOException {
+        File file = new File(fileName);
+        FileWriter writer = new FileWriter(file);
+        writer.write(builder.toString());
+        writer.close();
     }
 
 }
